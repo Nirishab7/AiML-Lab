@@ -1,9 +1,5 @@
 import csv
 
-
-
-
-
 def min_generalizations(h, x):
     h_new = list(h)
     for i in range(len(h)):
@@ -97,7 +93,7 @@ def candidate_elimination(examples):
         print("\n S[{0}]:".format(i),S)
     return 
 
-with open('car.csv')  as csvFile:
+with open('candidate elimination/car.csv')  as csvFile:
     examples = [tuple(line) for line in csv.reader(csvFile)]     
-print(examples)
+#print(examples)
 candidate_elimination(examples)
