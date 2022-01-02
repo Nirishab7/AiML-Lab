@@ -56,7 +56,9 @@ def specialize_G(x, domains, G, S):
                                  any([more_general(g1, h) 
                                       for g1 in G if h != g1])])
     return G
+
 def more_general(h1, h2):
+    #print(".....",h1,h2)
     more_general_parts = []
     for x, y in zip(h1, h2):
         mg = x == "?" or (x != "0" and (x == y or y == "0"))
@@ -72,20 +74,26 @@ def get_domains(examples):
 
 def candidate_elimination(examples):
     domains = get_domains(examples)[:-1]
-    #print(domains
+    #print(domains)    #domains holds all possible values in a each column   ;   list of list 
+    #[:-1] removes ['Y','N']
+    #domains=[['japan', 'usa'], ['toyota', 'honda', 'chrysler'], ['white', 'red', 'blue', 'green'], ['1970', '1990', '1980'], ['economy', 'sports']]
     
     G = set([("?",)*(len(domains))])
     S = set([('0',)*(len(domains))])
+    #print(G)
+
     i=0
-    print("\n G[{0}]:".format(i),G)
+    print("\n G[{0}]: {1}".format(i,G))
     print("\n S[{0}]:".format(i),S)
     for instance in examples:
         i=i+1
         x, label = instance[:-1], instance[-1]  # Splitting data into attributes and decisions
+
         if label=='Y': # x is positive example
-            G = {g for g in G if more_general(g, x)}
-            
+            G = {g for g in G if more_general(g, x)}   
+            #print(G)
             S = generalize_S(x, G, S)
+
         else: # x is negative example
             S = {s for s in S if not more_general(s,x)}
             G = specialize_G(x, domains, G, S)
@@ -94,6 +102,6 @@ def candidate_elimination(examples):
     return 
 
 with open('candidate elimination/car.csv')  as csvFile:
-    examples = [tuple(line) for line in csv.reader(csvFile)]     
+    examples = [tuple(line) for line in csv.reader(csvFile)]   #List of  tuples
 #print(examples)
 candidate_elimination(examples)
