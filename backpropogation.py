@@ -1,20 +1,34 @@
 import numpy as np
-X = np.array(([2, 9], [1, 5], [3, 6]), dtype=float)
-y = np.array(([92], [86], [89]), dtype=float)
+X = np.array(([2, 9], [1, 5], [3, 6]))
+#print(X)    prints 2d array
+#print(np.amax(X,axis=0))    prints maximum of X array longitudinally(i.e it prints [3 9]) 
 X = X/np.amax(X,axis=0) # maximum of X array longitudinally
-y = y/100
+#print(np.amax(X,axis=0))  prints modified 2D array
+#print(X)                   it prints [1. 1.] 
+
+Y = np.array(([92], [86], [89]))
+Y = Y/100
+
+
+
 #Sigmoid Function
 def sigmoid (x):
     return 1/(1 + np.exp(-x))
+
+
 #Derivative of Sigmoid Function
 def derivatives_sigmoid(x):
     return x * (1 - x)
+
+
 #Variable initialization
 epoch=7000 #Setting training iterations
 lr=0.1 #Setting learning rate
 inputlayer_neurons = 2 #number of features in data set
 hiddenlayer_neurons = 3 #number of hidden layers neurons
 output_neurons = 1 #number of neurons at output layer
+
+
 #weight and bias initialization
 wh=np.random.uniform(size=(inputlayer_neurons,hiddenlayer_neurons))
 bh=np.random.uniform(size=(1,hiddenlayer_neurons))
@@ -30,8 +44,9 @@ for i in range(epoch):
     outinp1=np.dot(hlayer_act,wout)
     outinp= outinp1+ bout
     output = sigmoid(outinp)
+    
 #Backpropagation
-    EO = y-output
+    EO = Y-output
     outgrad = derivatives_sigmoid(output)
     d_output = EO* outgrad
     EH = d_output.dot(wout.T)
@@ -42,6 +57,5 @@ for i in range(epoch):
     wh += X.T.dot(d_hiddenlayer) *lr
     #bh += np.sum(d_hiddenlayer, axis=0,keepdims=True) *lr
 print("Input: \n" + str(X)) 
-print("Actual Output: \n" + str(y))
+print("Actual Output: \n" + str(Y))
 print("Predicted Output: \n" ,output)
-
