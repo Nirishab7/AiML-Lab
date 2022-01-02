@@ -1,0 +1,6 @@
+country,brand,color,year,type,target
+japan,honda,blue,1980,economy,YES
+japan,toyota,green,1970,sports,NO
+japan,toyota,blue,1990,economy,YES
+usa,chrysler,red,1980,economy,NO
+japan,toyota,white,1980,economy,YES
