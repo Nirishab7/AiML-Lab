@@ -1,6 +1,10 @@
 import pandas as pd
 from collections import Counter
 import math
+#import pprint
+import json
+import yaml   #pip install pyyaml
+
 df_tennis=pd.read_csv("id3V2/Company.csv")
 
 def entropy_list(a_list):
@@ -46,4 +50,6 @@ attribute_names=list(df_tennis.columns.str.strip())
 attribute_names.remove('Profit')
 tree=id3(df_tennis,attribute_names,'Profit')
 print("The resulant Decision Tree")
-print(tree)
+#pprint.pprint(tree)
+#print(json.dumps(tree,sort_keys=False,indent=2))
+print(yaml.dump(tree,sort_keys=False,default_flow_style=False))
