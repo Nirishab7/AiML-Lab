@@ -1,7 +1,7 @@
 import pandas as pd
 from collections import Counter
 import math
-df_tennis=pd.read_csv("desktop/company.csv")
+df_tennis=pd.read_csv("id3V2/Company.csv")
 
 def entropy_list(a_list):
     cnt=Counter(x for x in a_list)
@@ -30,6 +30,7 @@ def id3(df,attribute_name,target):
         return None
     else:
         #default_class=max(cnt.keys())
+        #print(attribute_name)
         gains=[info_gain(df,attr,target) for attr in attribute_name]  #gains stores ig values for each atttributes in dataset
         index_max=gains.index(max(gains))
         best_attr=attribute_name[index_max]
@@ -41,9 +42,8 @@ def id3(df,attribute_name,target):
             tree[best_attr][attr_val]=subtree
         return tree
 
-attribute_names=list(df_tennis.columns)
+attribute_names=list(df_tennis.columns.str.strip())
 attribute_names.remove('Profit')
-tree=id3(df_tennis,'Profit',attribute_names)
+tree=id3(df_tennis,attribute_names,'Profit')
 print("The resulant Decision Tree")
 print(tree)
-
