@@ -1,10 +1,10 @@
 import numpy as np
 X = np.array(([2, 9], [1, 5], [3, 6]))
-#print(X)    prints 2d array
+#print(X)    #prints 2d array
 #print(np.amax(X,axis=0))    prints maximum of X array longitudinally(i.e it prints [3 9]) 
 X = X/np.amax(X,axis=0) # maximum of X array longitudinally
 #print(np.amax(X,axis=0))  prints modified 2D array
-#print(X)                   it prints [1. 1.] 
+print(X)                   #it prints [1. 1.] 
 
 Y = np.array(([92], [86], [89]))
 Y = Y/100
@@ -41,18 +41,21 @@ for i in range(epoch):
     hinp1=np.dot(X,wh)
     hinp=hinp1 + bh
     hlayer_act = sigmoid(hinp)
+
     outinp1=np.dot(hlayer_act,wout)
     outinp= outinp1+ bout
     output = sigmoid(outinp)
     
 #Backpropagation
-    EO = Y-output
+    EO  = Y-output
     outgrad = derivatives_sigmoid(output)
     d_output = EO* outgrad
-    EH = d_output.dot(wout.T)
+
+    EH = np.dot(d_output,wout.T)
     hiddengrad = derivatives_sigmoid(hlayer_act)#how much hidden layer wts contributed to error
     d_hiddenlayer = EH * hiddengrad
-    wout += hlayer_act.T.dot(d_output) *lr# dotproduct of nextlayererror and currentlayerop
+
+    wout += np.dot(hlayer_act,d_output) *lr# dotproduct of nextlayererror and currentlayerop
    # bout += np.sum(d_output, axis=0,keepdims=True) *lr
     wh += X.T.dot(d_hiddenlayer) *lr
     #bh += np.sum(d_hiddenlayer, axis=0,keepdims=True) *lr
