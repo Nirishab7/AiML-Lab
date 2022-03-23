@@ -1,15 +1,11 @@
 from numpy import *
-import operator
-from os import listdir
-import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np1
-import numpy.linalg as np
 from scipy.stats.stats import pearsonr
  
 def kernel(point,xmat, k):
-    m,n = np1.shape(xmat)
+    m,n= np1.shape(xmat)
     weights = np1.mat(np1.eye((m)))
     for j in range(m):
         diff = point - X[j]
