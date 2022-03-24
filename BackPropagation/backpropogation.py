@@ -10,7 +10,6 @@ Y = np.array(([92], [86], [89]))
 Y = Y/100
 
 
-
 #Sigmoid Function
 def sigmoid (x):
     return 1/(1 + np.exp(-x))

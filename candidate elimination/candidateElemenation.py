@@ -101,7 +101,9 @@ def candidate_elimination(examples):
         print("\n S[{0}]:".format(i),S)
     return 
 
-with open('data21_shape.csv')  as csvFile:
-    examples = [tuple(line) for line in csv.reader(csvFile)]   #List of  tuples
+data=csv.reader(open("candidate elimination/car.csv"))
+examples=[]
+for x in data:
+    examples.append(tuple(x))   #List of  tuples
 #print(examples)
 candidate_elimination(examples)

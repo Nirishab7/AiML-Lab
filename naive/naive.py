@@ -16,6 +16,7 @@ xtrain,xtest,ytrain,ytest=train_test_split(X,y)
 from sklearn.feature_extraction.text import CountVectorizer
 count_vect = CountVectorizer()
 xtrain_dtm = count_vect.fit_transform(xtrain)
+#print(xtrain_dtm)
 xtest_dtm=count_vect.transform(xtest)
 #print(count_vect.get_feature_names())
 

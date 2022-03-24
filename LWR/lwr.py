@@ -7,6 +7,7 @@ from scipy.stats.stats import pearsonr
 def kernel(point,xmat, k):
     m,n= np1.shape(xmat)
     weights = np1.mat(np1.eye((m)))
+
     for j in range(m):
         diff = point - X[j]
         weights[j,j] = np1.exp(diff*diff.T/(-2.0*k**2))
@@ -25,7 +26,7 @@ def localWeightRegression(xmat,ymat,k):
     return ypred
        
 # load data points
-data = pd.read_csv('LWR/10Data.csv')
+data = pd.read_csv('10Data.csv')
 bill = np1.array(data.total_bill)
 tip = np1.array(data.tip)
  
@@ -35,6 +36,7 @@ mtip = np1.mat(tip)
 m= np1.shape(mbill)[1]
 one = np1.mat(np1.ones(m))
 X= np1.hstack((one.T,mbill.T))
+#print(X)
 
 
 
@@ -46,10 +48,13 @@ xsort = X[SortIndex][:,0]
 
 
      
-fig = plt.figure()
+'''fig = plt.figure()
 ax = fig.add_subplot(1,1,1)
 ax.scatter(bill,tip, color='green')
-ax.plot(xsort[:,1],ypred[SortIndex], color = 'red', linewidth=5)
+ax.plot(xsort[:,1],ypred[SortIndex], color = 'red', linewidth=5)'''
+
+plt.scatter(bill,tip, color='green')
+plt.plot(xsort[:,1],ypred[SortIndex], color = 'red', linewidth=5)
 plt.xlabel('Total bill')
 plt.ylabel('Tip')
 plt.show()

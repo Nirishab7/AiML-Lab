@@ -18,7 +18,7 @@ def entropy(probs):
 
 def info_gain(df,attr,target):
     df_split=df.groupby(attr)   #splitting the dataset into two parts, in which one dataset consist of a column values of attribute 'attr'
-    print(df_split.head())
+    #print(df_split.head())
     return
     '''nobs=len(df.index)     #no. of rows in the dataset
     df_agg_ent=df_split.agg({target:[entropy_list, lambda x: len(x)/nobs]})     
@@ -58,12 +58,12 @@ def id3(df,attribute_name,target):
             return result
     else:
         return default'''
-
+        
 attribute_names=list(df_tennis.columns.str.strip())
 attribute_names.remove('Profit')
 info_gain(df_tennis,'Competition','Profit')
-'''tree=id3(df_tennis,attribute_names,'Profit')
-print("The resulant Decision Tree")'''
+tree=id3(df_tennis,attribute_names,'Profit')
+'''print("The resulant Decision Tree")'''
 #pprint.pprint(tree)
 #print(json.dumps(tree,sort_keys=False,indent=2))
 print(yaml.dump(tree,sort_keys=False,default_flow_style=False))
